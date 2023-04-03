@@ -5,24 +5,28 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Lab 9 - DEVTOOLS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
-  <div style="display: flex; flex-direction: column; padding: 200px;">
-    <p>Name : <input id="inputname" type="text"></p>
-    <p>Surname : <input id="inputsurname" type="text"></p>
-    <p>Your number : <input id="yournumber" type="text"></p>
-    <p>Chose image file : <input type="file" onchange="convertimage(this, value)"></p>
+  <div class="w-full h-screen bg-gray-800 flex flex-col justify-center items-center space-y-6 ">
+    <div class="bg-gray-200 w-2/5 rounded-lg">
+      <div class="p-8 flex flex-col space-y-4">
+        <input id="inputname" type="text" class="px-4 py-2 rounded-md border border-[#c4c4c4]" placeholder="Name" />
+        <input id="inputsurname" type="text" class="px-4 py-2 rounded-md border border-[#c4c4c4]"
+          placeholder="Surname" />
+        <input id="yournumber" type="text" class="px-4 py-2 rounded-md border border-[#c4c4c4]"
+          placeholder="[1, 2 3, 4]" />
+        <input type="file" onchange="convertimage(this, value)">
+        <button onclick="getImg()" class="bg-blue-600 text-white py-2 px-10 rounded-md">click</button>
+      </div>
+    </div>
 
-    <button onclick="getImg()">click</button>
-    <h1>Your info Under here!!</h1>
-    <h3 id="name"></h3>
-    <h3 id="surname"></h3>
-    <h3 id="number"></h3>
-    <div style="display: flex; justify-content: space-between; margin-top: 50px;">
-      <img width="500px" height="500px" id="1" alt="">
-      <img width="500px" height="500px" id="2" alt="">
+    <div class="flex">
+      <img width="500px" height="500px" id="1" alt="" class="rounded-md">
+      <img width="500px" height="500px" id="2" alt="" class="rounded-md">
+
     </div>
   </div>
 
@@ -33,16 +37,12 @@
   let surname = ""
   let number = ""
   function convertimage(element, value) {
-    console.log(value);
-
     var reader = new FileReader();
     reader.onloadend = function () {
-      // console.log('RESULT', reader.result);
       img = reader.result;
       name = document.getElementById("inputname").value
       surname = document.getElementById("inputsurname").value
       number = document.getElementById("yournumber").value
-      console.log(number);
       document.getElementById("1").src = reader.result
     }
     reader.readAsDataURL(element.files[0]);
@@ -70,10 +70,6 @@
       ;
     const response = await request.json();
     document.getElementById("2").src = response.processed_image
-    document.getElementById("name").innerHTML = response.name
-    document.getElementById("surname").innerHTML = response.surname
-    document.getElementById("number").innerHTML = response.numbers
-    console.log(response);
   }
 </script>
 
